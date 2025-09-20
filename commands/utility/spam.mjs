@@ -13,7 +13,6 @@ export const data = new SlashCommandBuilder()
 export async function execute(interaction) {
   const messageId = interaction.options.getString('id');
 
-  // メッセージの読み込み
   const messages = JSON.parse(await fs.readFile('./new/messages.json', 'utf-8'));
   const userMessages = messages.users[interaction.user.id] || {};
   const content = userMessages[messageId];
@@ -23,7 +22,6 @@ export async function execute(interaction) {
     return;
   }
 
-  // 設定の読み込み
   const settings = JSON.parse(await fs.readFile('./new/settings.json', 'utf-8'));
   const userSettings = settings.users[interaction.user.id] || {
     interval: 0,
@@ -33,12 +31,9 @@ export async function execute(interaction) {
     mentionUsers: []
   };
 
-  // 非表示メッセージを送信
   await interaction.reply({ content: 'メッセージを送信中...', ephemeral: true });
 
-  // 公開メッセージを非表示メッセージに返信
   try {
-    // ランダムメンション
     let mention = '';
     if (userSettings.mentionUsers && userSettings.mentionUsers.length > 0) {
       const randomUserId = userSettings.mentionUsers[Math.floor(Math.random() * userSettings.mentionUsers.length)];
