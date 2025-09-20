@@ -1,6 +1,5 @@
 import { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
 
-// コマンドの定義
 export const data = new SlashCommandBuilder()
     .setName('custom-send')
     .setDescription('登録せずに直接送信')
@@ -29,7 +28,6 @@ export const data = new SlashCommandBuilder()
             .setRequired(false)
             .setMinValue(0)
     )
-    // メッセージ1と関連オプション（すべて任意）
     .addStringOption(option =>
         option
             .setName('message1')
@@ -66,7 +64,6 @@ export const data = new SlashCommandBuilder()
                 { name: '赤', value: 'Danger' }
             )
     )
-    // メッセージ2と関連オプション（すべて任意）
     .addStringOption(option =>
         option
             .setName('message2')
@@ -103,7 +100,6 @@ export const data = new SlashCommandBuilder()
                 { name: '赤', value: 'Danger' }
             )
     )
-    // メッセージ3と関連オプション（すべて任意）
     .addStringOption(option =>
         option
             .setName('message3')
@@ -141,7 +137,6 @@ export const data = new SlashCommandBuilder()
             )
     );
 
-// メッセージ送信ロジックを関数として抽出
 const sendMessages = async (interaction, count, mode, interval, messages, embeds, buttons) => {
     try {
         let currentIndex = 0;
@@ -197,7 +192,6 @@ const sendMessages = async (interaction, count, mode, interval, messages, embeds
     }
 };
 
-// 実行関数
 export const execute = async (interaction) => {
 
     const count = interaction.options.getInteger('count');
@@ -241,6 +235,5 @@ export const execute = async (interaction) => {
         ephemeral: true,
     });
 
-    // 初回のメッセージ送信
     await sendMessages(interaction, count, mode, interval, messages, embeds, buttons);
 };
