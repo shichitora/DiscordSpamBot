@@ -39,7 +39,6 @@ export async function execute(interaction) {
   const messageId = modalSubmit.fields.getTextInputValue('messageId');
   const content = modalSubmit.fields.getTextInputValue('messageContent');
 
-  // JSONに保存
   const messages = JSON.parse(await fs.readFile('./new/messages.json', 'utf-8'));
   if (!messages.users[interaction.user.id]) {
     messages.users[interaction.user.id] = {};
