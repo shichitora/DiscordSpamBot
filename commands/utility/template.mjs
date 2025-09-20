@@ -40,12 +40,9 @@ export async function execute(interaction) {
     mentionUsers: []
   };
 
-  // 非表示メッセージを送信
   await interaction.reply({ content: '公式メッセージを送信中...', ephemeral: true });
 
-  // 公開メッセージを非表示メッセージに返信
   try {
-    // ランダムメンション
     let mention = '';
     if (userSettings.mentionUsers && userSettings.mentionUsers.length > 0) {
       const randomUserId = userSettings.mentionUsers[Math.floor(Math.random() * userSettings.mentionUsers.length)];
