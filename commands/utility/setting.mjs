@@ -68,7 +68,6 @@ export async function execute(interaction) {
     .map(id => id.trim())
     .filter(id => id.match(/^\d+$/));
 
-  // バリデーション
   if (isNaN(interval) || interval < 0) {
     await modalSubmit.reply({ content: '送信間隔は0秒以上の数値を入力してください。', ephemeral: true });
     return;
@@ -82,7 +81,6 @@ export async function execute(interaction) {
     return;
   }
 
-  // 設定を保存
   const settings = JSON.parse(await fs.readFile('./new/settings.json', 'utf-8'));
   settings.users[interaction.user.id] = { interval, count, attachButton, buttonUrl, mentionUsers };
   await fs.writeFile('./new/settings.json', JSON.stringify(settings, null, 2));
